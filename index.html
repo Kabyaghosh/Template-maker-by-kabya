@@ -13,6 +13,7 @@
             <!-- Header with Logo and Date -->
             <div class="header">
                 <div class="logo">
+                    <input type="file" id="logo-upload" accept="image/*" onchange="updateLogo(event)">
                     <img id="logo" src="https://via.placeholder.com/150" alt="Logo">
                 </div>
                 <div class="date" id="date-text">
@@ -22,6 +23,7 @@
 
             <!-- Background Image with Headline -->
             <div class="image-box">
+                <input type="file" id="image-upload" accept="image/*" onchange="updateImage(event)">
                 <img id="template-image" src="https://via.placeholder.com/800x400" alt="Template Image">
                 <h2 id="headline-text">Main Headline Goes Here</h2>
             </div>
