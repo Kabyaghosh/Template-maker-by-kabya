@@ -7,9 +7,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #ff3d00, #8b0000);
+            background: #f5f5f5;
             text-align: center;
-            padding: 20px;
+            padding: 10px;
         }
         .container {
             display: flex;
@@ -17,7 +17,8 @@
             flex-wrap: wrap;
         }
         .editor {
-            width: 320px;
+            width: 100%;
+            max-width: 350px;
             padding: 15px;
             background: white;
             border-radius: 10px;
@@ -25,13 +26,16 @@
             margin-bottom: 20px;
         }
         .poster {
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             background: white;
             border: 5px solid red;
             padding: 10px;
             text-align: center;
             position: relative;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); /* Subtle Texture */
+            background-color: #ffd700;
         }
         .top-section {
             display: flex;
@@ -40,7 +44,7 @@
             padding: 5px 10px;
             background: red;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
         }
         .news-image {
@@ -51,12 +55,11 @@
         }
         .bottom-section {
             padding: 10px;
-            text-align: center;
         }
         .news-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            padding: 10px;
+            padding: 8px;
             background: #ff5722;
             color: white;
             border-radius: 8px;
@@ -94,11 +97,27 @@
             cursor: pointer;
             border-radius: 5px;
         }
+        /* Responsive Styles */
+        @media (max-width: 500px) {
+            .poster {
+                max-width: 95%;
+            }
+            .editor {
+                max-width: 90%;
+            }
+            .top-section {
+                font-size: 12px;
+                padding: 5px;
+            }
+            .news-title {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h2 style="color: white;">News Poster Editor</h2>
+    <h2>News Poster Editor</h2>
 
     <div class="container">
         <div class="editor">
