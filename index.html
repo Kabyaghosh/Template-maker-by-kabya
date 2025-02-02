@@ -7,79 +7,80 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             background-color: #f4f4f4;
-            margin: 0;
+            text-align: center;
             padding: 20px;
         }
         .container {
             display: flex;
             justify-content: center;
-            align-items: center;
             flex-wrap: wrap;
         }
         .editor {
-            width: 300px;
-            padding: 10px;
+            width: 320px;
+            padding: 15px;
             background: #fff;
-            margin-right: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
         .poster {
-            position: relative;
             width: 400px;
-            height: 500px;
             background: white;
             border: 5px solid red;
             padding: 10px;
             text-align: center;
-            overflow: hidden;
+            position: relative;
         }
-        .poster img {
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 10px;
+            background: red;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .news-image {
             width: 100%;
             height: 250px;
             object-fit: cover;
+            background: #ddd;
         }
-        .headline, .date, .content, .footer {
-            position: absolute;
-            left: 10px;
-            color: white;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 5px;
-            border-radius: 5px;
+        .bottom-section {
+            padding: 10px;
+            text-align: center;
         }
-        .headline {
-            top: 10px;
+        .news-title {
             font-size: 18px;
             font-weight: bold;
+            margin-bottom: 5px;
+            color: black;
         }
-        .date {
-            top: 10px;
-            right: 10px;
-            font-size: 16px;
-        }
-        .content {
-            bottom: 80px;
+        .email {
             font-size: 14px;
-            width: 90%;
+            color: #333;
+            margin-bottom: 10px;
         }
-        .footer {
-            bottom: 10px;
-            font-size: 12px;
+        .sponsor {
+            background: red;
+            color: white;
+            padding: 5px;
+            font-size: 14px;
+            text-align: center;
         }
-        .sponsor-logo {
-            width: 80px;
-            height: 30px;
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: white;
-            object-fit: contain;
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         button {
-            margin: 10px;
+            margin-top: 10px;
             padding: 10px;
+            width: 100%;
             font-size: 14px;
             background: red;
             color: white;
@@ -95,36 +96,40 @@
 
     <div class="container">
         <div class="editor">
-            <label>Upload Main Image:</label>
+            <label>Upload News Image:</label>
             <input type="file" id="mainImageUpload"><br><br>
 
-            <label>Headline:</label>
-            <input type="text" id="headlineInput" value="KALAMOLOGY NEWS"><br><br>
+            <label>News Channel Name:</label>
+            <input type="text" id="channelNameInput" value="KALAMOLOGY NEWS"><br><br>
 
             <label>Date:</label>
             <input type="text" id="dateInput" value="02 ফেব্রুয়ারি ২০২৫"><br><br>
 
-            <label>Main Content:</label>
-            <textarea id="contentInput" rows="4">চ্যাম্পিয়ন নাটোর রাজশাহী ফুটবল দলের হয়ে খেলেছেন সাতক্ষীরার দেবহাটা ও কালিগঞ্জ উপজেলার একাধিক ফুটবলার।</textarea><br><br>
+            <label>News Title:</label>
+            <textarea id="newsTitleInput" rows="2">চ্যাম্পিয়ন নাটোর রাজশাহী ফুটবল দলের হয়ে খেলেছেন সাতক্ষীরার দেবহাটা ও কালিগঞ্জ উপজেলার একাধিক ফুটবলার।</textarea><br><br>
 
-            <label>Footer Email:</label>
-            <input type="text" id="footerInput" value="abulkalaminakbar@gmail.com"><br><br>
+            <label>Email Address:</label>
+            <input type="text" id="emailInput" value="abulkalaminakbar@gmail.com"><br><br>
 
-            <label>Upload Sponsor Logo:</label>
-            <input type="file" id="sponsorUpload"><br><br>
+            <label>Sponsor Text:</label>
+            <input type="text" id="sponsorTextInput" value="Sponsored by Sabbir Telecom"><br><br>
 
             <button onclick="downloadPoster()">Download Poster</button>
         </div>
 
         <div class="poster" id="poster">
-            <img id="mainImage" src="" alt="Main Image">
-            <div class="headline" id="headlineText">KALAMOLOGY NEWS</div>
-            <div class="date" id="dateText">02 ফেব্রুয়ারি ২০২৫</div>
-            <div class="content" id="contentText">
-                চ্যাম্পিয়ন নাটোর রাজশাহী ফুটবল দলের হয়ে খেলেছেন সাতক্ষীরার দেবহাটা ও কালিগঞ্জ উপজেলার একাধিক ফুটবলার।
+            <div class="top-section">
+                <div id="channelName">KALAMOLOGY NEWS</div>
+                <div id="dateText">02 ফেব্রুয়ারি ২০২৫</div>
             </div>
-            <div class="footer" id="footerText">abulkalaminakbar@gmail.com</div>
-            <img id="sponsorImage" class="sponsor-logo" src="" alt="Sponsor Logo">
+            <img id="mainImage" class="news-image" src="" alt="News Image">
+            <div class="bottom-section">
+                <div class="news-title" id="newsTitle">
+                    চ্যাম্পিয়ন নাটোর রাজশাহী ফুটবল দলের হয়ে খেলেছেন সাতক্ষীরার দেবহাটা ও কালিগঞ্জ উপজেলার একাধিক ফুটবলার।
+                </div>
+                <div class="email" id="emailText">abulkalaminakbar@gmail.com</div>
+            </div>
+            <div class="sponsor" id="sponsorText">Sponsored by Sabbir Telecom</div>
         </div>
     </div>
 
@@ -140,31 +145,24 @@
             }
         });
 
-        document.getElementById('headlineInput').addEventListener('input', function() {
-            document.getElementById('headlineText').innerText = this.value;
+        document.getElementById('channelNameInput').addEventListener('input', function() {
+            document.getElementById('channelName').innerText = this.value;
         });
 
         document.getElementById('dateInput').addEventListener('input', function() {
             document.getElementById('dateText').innerText = this.value;
         });
 
-        document.getElementById('contentInput').addEventListener('input', function() {
-            document.getElementById('contentText').innerText = this.value;
+        document.getElementById('newsTitleInput').addEventListener('input', function() {
+            document.getElementById('newsTitle').innerText = this.value;
         });
 
-        document.getElementById('footerInput').addEventListener('input', function() {
-            document.getElementById('footerText').innerText = this.value;
+        document.getElementById('emailInput').addEventListener('input', function() {
+            document.getElementById('emailText').innerText = this.value;
         });
 
-        document.getElementById('sponsorUpload').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('sponsorImage').src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
+        document.getElementById('sponsorTextInput').addEventListener('input', function() {
+            document.getElementById('sponsorText').innerText = this.value;
         });
 
         function downloadPoster() {
