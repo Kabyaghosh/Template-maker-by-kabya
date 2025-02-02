@@ -3,52 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Template Editor</title>
+    <title>News Template - Created by Kabya</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Varela+Round&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="template">
-            <!-- Header with Logo and Date -->
-            <div class="header">
-                <div class="logo">
-                    <input type="file" id="logo-upload" accept="image/*" onchange="updateLogo(event)">
-                    <img id="logo" src="https://via.placeholder.com/150" alt="Logo">
-                </div>
-                <div class="date" id="date-text">
-                    <!-- Date will be dynamically set -->
-                </div>
-            </div>
 
-            <!-- Background Image with Headline -->
-            <div class="image-box">
-                <input type="file" id="image-upload" accept="image/*" onchange="updateImage(event)">
-                <img id="template-image" src="https://via.placeholder.com/800x400" alt="Template Image">
-                <h2 id="headline-text">Main Headline Goes Here</h2>
-            </div>
-
-            <!-- Text Color and Email Section -->
-            <div class="controls">
-                <label for="color-picker">Choose Text Color:</label>
-                <input type="color" id="color-picker" value="#333333">
-
-                <label for="text-input">Edit Headline Text (Bangla Supported):</label>
-                <input type="text" id="text-input" placeholder="Enter new headline text">
-
-                <label for="email-input">Enter Email:</label>
-                <input type="email" id="email-input" placeholder="Enter your email">
-
-                <div class="advertisement-box">
-                    <p>Advertisement Section</p>
-                    <input type="text" id="ad-input" placeholder="Enter Advertisement Text">
-                </div>
-
-                <button onclick="downloadTemplate()">Download Template</button>
-            </div>
+<!-- Header -->
+<header>
+    <div class="container header-container">
+        <div class="logo">
+            <input type="file" id="logo-upload" accept="image/*" onchange="updateLogo(event)">
+            <img id="logo" src="https://via.placeholder.com/150" alt="Logo">
         </div>
+        <div class="date" id="date-text"></div>
+    </div>
+</header>
+
+<!-- Main Section -->
+<main class="main-container">
+    <div class="image-box">
+        <input type="file" id="image-upload" accept="image/*" onchange="updateImage(event)">
+        <img id="template-image" src="https://via.placeholder.com/800x400" alt="Main Image">
+        <h2 id="headline-text">Main Headline Goes Here</h2>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Editable Sections -->
+    <section class="controls">
+        <label for="color-picker">Choose Text Color:</label>
+        <input type="color" id="color-picker" value="#333333">
+
+        <label for="text-input">Edit Headline Text (Bangla Supported):</label>
+        <input type="text" id="text-input" placeholder="Enter new headline text">
+
+        <label for="email-input">Enter Email:</label>
+        <input type="email" id="email-input" placeholder="Enter your email">
+
+        <div class="advertisement-box">
+            <p>Advertisement Section</p>
+            <input type="text" id="ad-input" placeholder="Enter Advertisement Text">
+        </div>
+
+        <button onclick="downloadTemplate()">Download Template</button>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>Created by Kabya &copy; 2025. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
