@@ -1,117 +1,135 @@
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
 }
 
+/* Container for layout centering */
 .container {
-    width: 80%;
-    max-width: 1000px;
+    width: 90%;
+    margin: 0 auto;
 }
 
-.template {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Header Styles */
+header {
+    background-color: #222;
+    padding: 20px 0;
+    text-align: center;
 }
 
-.header {
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .logo img {
-    width: 150px;
+    max-width: 100px;
 }
 
 .date {
     font-size: 18px;
     font-family: 'Varela Round', sans-serif;
-    color: #555;
+    color: #fff;
+}
+
+/* Main Section */
+.main-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .image-box {
     position: relative;
-    margin-bottom: 20px;
-    text-align: center;
+    width: 100%;
+    max-width: 800px;
 }
 
-#template-image {
+.image-box img {
     width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #headline-text {
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
     left: 20px;
-    color: white;
     font-size: 36px;
-    font-weight: 700;
+    font-weight: bold;
+    color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-    font-family: 'Varela Round', sans-serif;
-    margin: 0;
 }
 
+/* Controls Section */
 .controls {
     margin-top: 20px;
+    text-align: center;
 }
 
-.controls label {
-    display: block;
-    margin: 10px 0;
-    font-weight: bold;
-}
-
-.controls input[type="text"], .controls input[type="email"], .controls input[type="color"] {
-    width: 100%;
+.controls input {
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
+    margin: 10px 0;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
 }
 
-.controls input[type="file"] {
-    margin-bottom: 20px;
+.advertisement-box {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
 }
 
-.controls button {
+button {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #333;
     color: white;
+    font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.controls button:hover {
-    background-color: #45a049;
+button:hover {
+    background-color: #555;
 }
 
-.advertisement-box {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
+/* Footer Styles */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
-.advertisement-box p {
-    font-weight: bold;
-    margin-bottom: 10px;
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+    }
+
+    .main-container {
+        margin-top: 20px;
+    }
+
+    .controls {
+        width: 100%;
+    }
+
+    .image-box {
+        width: 90%;
+    }
+
+    #headline-text {
+        font-size: 24px;
+    }
 }
