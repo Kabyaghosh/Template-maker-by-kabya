@@ -5,113 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Poster Editor</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            text-align: center;
-            padding: 10px;
-        }
-        .container {
+            background-color: #f4f4f4;
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
-        .editor {
-            width: 100%;
-            max-width: 350px;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        .poster {
-            width: 100%;
-            max-width: 400px;
-            background: white;
-            border: 5px solid red;
-            padding: 10px;
-            text-align: center;
+        .poster-container {
+            width: 600px;
+            height: 800px;
             position: relative;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            background: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); /* Subtle Texture */
-            background-color: #ffd700;
+            background: url('YOUR_NEW_BACKGROUND_IMAGE_URL_HERE') no-repeat center;
+            background-size: cover;
+            padding: 20px;
+            border: 5px solid #d62828;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .top-section {
+        .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 5px 10px;
-            background: red;
             color: white;
-            font-size: 14px;
             font-weight: bold;
+            font-size: 18px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
         }
         .news-image {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
-            background: #ddd;
-        }
-        .bottom-section {
-            padding: 10px;
+            height: 300px;
+            background: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            position: relative;
         }
         .news-title {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: bold;
-            padding: 8px;
-            background: #ff5722;
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-            margin-bottom: 10px;
-        }
-        .email {
-            font-size: 14px;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .sponsor {
-            background: red;
-            color: white;
-            padding: 8px;
-            font-size: 14px;
+            color: #fff;
             text-align: center;
-            border-radius: 5px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
         }
-        input, textarea {
-            width: 100%;
+        .email-section {
+            font-size: 16px;
+            text-align: center;
+            color: #fff;
+            background: #d62828;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .sponsor-section {
+            font-size: 16px;
+            text-align: center;
+            color: white;
+            background: #444;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        input, textarea, button {
+            margin: 10px;
             padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            font-size: 16px;
         }
         button {
-            margin-top: 10px;
-            padding: 10px;
-            width: 100%;
-            font-size: 14px;
-            background: red;
+            cursor: pointer;
+            background: #d62828;
             color: white;
             border: none;
-            cursor: pointer;
+            padding: 10px;
             border-radius: 5px;
-        }
-        /* Responsive Styles */
-        @media (max-width: 500px) {
-            .poster {
-                max-width: 95%;
-            }
-            .editor {
-                max-width: 90%;
-            }
-            .top-section {
-                font-size: 12px;
-                padding: 5px;
-            }
-            .news-title {
-                font-size: 16px;
-            }
         }
     </style>
 </head>
@@ -119,87 +97,43 @@
 
     <h2>News Poster Editor</h2>
 
-    <div class="container">
-        <div class="editor">
-            <label>Upload News Image:</label>
-            <input type="file" id="mainImageUpload"><br><br>
-
-            <label>News Channel Name:</label>
-            <input type="text" id="channelNameInput" value="KALAMOLOGY NEWS"><br><br>
-
-            <label>Date:</label>
-            <input type="text" id="dateInput" value="02 ফেব্রুয়ারি ২০২৫"><br><br>
-
-            <label>News Title:</label>
-            <textarea id="newsTitleInput" rows="2">চ্যাম্পিয়ন নাটোর রাজশাহী ফুটবল দলের হয়ে খেলেছেন সাতক্ষীরার দেবহাটা ও কালিগঞ্জ উপজেলার একাধিক ফুটবলার।</textarea><br><br>
-
-            <label>Email Address:</label>
-            <input type="text" id="emailInput" value="abulkalaminakbar@gmail.com"><br><br>
-
-            <label>Sponsor Text:</label>
-            <input type="text" id="sponsorTextInput" value="Sponsored by Sabbir Telecom"><br><br>
-
-            <button onclick="downloadPoster()">Download Poster</button>
+    <div class="poster-container" id="poster">
+        <div class="header">
+            <span contenteditable="true" id="newsChannel">KALAMOLOGY NEWS</span>
+            <span contenteditable="true" id="newsDate">02 ফেব্রুয়ারি 2025</span>
         </div>
-
-        <div class="poster" id="poster">
-            <div class="top-section">
-                <div id="channelName">KALAMOLOGY NEWS</div>
-                <div id="dateText">02 ফেব্রুয়ারি ২০২৫</div>
-            </div>
-            <img id="mainImage" class="news-image" src="" alt="News Image">
-            <div class="bottom-section">
-                <div class="news-title" id="newsTitle">
-                    চ্যাম্পিয়ন নাটোর রাজশাহী ফুটবল দলের হয়ে খেলেছেন সাতক্ষীরার দেবহাটা ও কালিগঞ্জ উপজেলার একাধিক ফুটবলার।
-                </div>
-                <div class="email" id="emailText">abulkalaminakbar@gmail.com</div>
-            </div>
-            <div class="sponsor" id="sponsorText">Sponsored by Sabbir Telecom</div>
-        </div>
+        <div class="news-image" id="newsImage">Upload Your Image</div>
+        <div class="news-title" contenteditable="true" id="newsTitle">Enter News Title Here</div>
+        <div class="email-section" contenteditable="true" id="newsEmail">abulkalaminakbar@gmail.com</div>
+        <div class="sponsor-section" contenteditable="true" id="sponsorText">SABBIR TELECOM - VIVO SHOP</div>
     </div>
 
+    <input type="file" id="imageUpload" accept="image/*">
+    <button onclick="downloadPoster()">Download Poster</button>
+
     <script>
-        document.getElementById('mainImageUpload').addEventListener('change', function(event) {
+        document.getElementById('imageUpload').addEventListener('change', function (event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('mainImage').src = e.target.result;
-                }
+                reader.onload = function (e) {
+                    document.getElementById('newsImage').style.background = `url('${e.target.result}') no-repeat center`;
+                    document.getElementById('newsImage').style.backgroundSize = "cover";
+                    document.getElementById('newsImage').textContent = "";
+                };
                 reader.readAsDataURL(file);
             }
         });
 
-        document.getElementById('channelNameInput').addEventListener('input', function() {
-            document.getElementById('channelName').innerText = this.value;
-        });
-
-        document.getElementById('dateInput').addEventListener('input', function() {
-            document.getElementById('dateText').innerText = this.value;
-        });
-
-        document.getElementById('newsTitleInput').addEventListener('input', function() {
-            document.getElementById('newsTitle').innerText = this.value;
-        });
-
-        document.getElementById('emailInput').addEventListener('input', function() {
-            document.getElementById('emailText').innerText = this.value;
-        });
-
-        document.getElementById('sponsorTextInput').addEventListener('input', function() {
-            document.getElementById('sponsorText').innerText = this.value;
-        });
-
         function downloadPoster() {
-            html2canvas(document.getElementById("poster")).then(canvas => {
-                const link = document.createElement("a");
-                link.href = canvas.toDataURL("image/png");
-                link.download = "news_poster.png";
+            html2canvas(document.getElementById('poster')).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'news-poster.png';
                 link.click();
             });
         }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 </body>
 </html>
