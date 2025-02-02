@@ -1,60 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Template - Created by Kabya</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Varela+Round&display=swap" rel="stylesheet">
+    <title>Professional News Template - Created by Kabya</title>
+
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Container for layout centering */
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #222;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 100px;
+        }
+
+        .date {
+            font-size: 18px;
+            font-family: 'Varela Round', sans-serif;
+            color: #fff;
+        }
+
+        /* Main Section */
+        .main-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-box {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #headline-text {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Controls Section */
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .controls input {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .advertisement-box {
+            margin-top: 20px;
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            .main-container {
+                margin-top: 20px;
+            }
+
+            .controls {
+                width: 100%;
+            }
+
+            .image-box {
+                width: 90%;
+            }
+
+            #headline-text {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- Header -->
-<header>
-    <div class="container header-container">
-        <div class="logo">
-            <input type="file" id="logo-upload" accept="image/*" onchange="updateLogo(event)">
-            <img id="logo" src="https://via.placeholder.com/150" alt="Logo">
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <input type="file" id="logo-upload" accept="image/*" onchange="updateLogo(event)">
+                <img id="logo" src="https://via.placeholder.com/150" alt="Logo">
+            </div>
+            <div class="date" id="date-text"></div>
         </div>
-        <div class="date" id="date-text"></div>
-    </div>
-</header>
+    </header>
 
-<!-- Main Section -->
-<main class="main-container">
-    <div class="image-box">
-        <input type="file" id="image-upload" accept="image/*" onchange="updateImage(event)">
-        <img id="template-image" src="https://via.placeholder.com/800x400" alt="Main Image">
-        <h2 id="headline-text">Main Headline Goes Here</h2>
-    </div>
-
-    <!-- Editable Sections -->
-    <section class="controls">
-        <label for="color-picker">Choose Text Color:</label>
-        <input type="color" id="color-picker" value="#333333">
-
-        <label for="text-input">Edit Headline Text (Bangla Supported):</label>
-        <input type="text" id="text-input" placeholder="Enter new headline text">
-
-        <label for="email-input">Enter Email:</label>
-        <input type="email" id="email-input" placeholder="Enter your email">
-
-        <div class="advertisement-box">
-            <p>Advertisement Section</p>
-            <input type="text" id="ad-input" placeholder="Enter Advertisement Text">
+    <!-- Main Section -->
+    <main class="main-container">
+        <div class="image-box">
+            <input type="file" id="image-upload" accept="image/*" onchange="updateImage(event)">
+            <img id="template-image" src="https://via.placeholder.com/800x400" alt="Main Image">
+            <h2 id="headline-text">Main Headline Goes Here</h2>
         </div>
 
-        <button onclick="downloadTemplate()">Download Template</button>
-    </section>
-</main>
+        <!-- Editable Sections -->
+        <section class="controls">
+            <label for="color-picker">Choose Text Color:</label>
+            <input type="color" id="color-picker" value="#333333">
 
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <p>Created by Kabya &copy; 2025. All rights reserved.</p>
-    </div>
-</footer>
+            <label for="text-input">Edit Headline Text (Bangla Supported):</label>
+            <input type="text" id="text-input" placeholder="Enter new headline text">
 
-<script src="script.js"></script>
+            <label for="email-input">Enter Email:</label>
+            <input type="email" id="email-input" placeholder="Enter your email">
+
+            <div class="advertisement-box">
+                <p>Advertisement Section</p>
+                <input type="text" id="ad-input" placeholder="Enter Advertisement Text">
+            </div>
+
+            <button onclick="downloadTemplate()">Download Template</button>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Created by Kabya &copy; 2025. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set the current date dynamically
+        const dateElement = document.getElementById('date-text');
+        const currentDate = new Date().toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        dateElement.textContent = currentDate;
+
+        // Function to update headline text
+        document.getElementById('text-input').addEventListener('input', function (event) {
+            document.getElementById('headline-text').textContent = event.target.value;
+        });
+
+        // Function to update text color
+        document.getElementById('color-picker').addEventListener('input', function (event) {
+            document.getElementById('headline-text').style.color = event.target.value;
+        });
+
+        // Function to update logo image
+        function updateLogo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('logo').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Function to update main image
+        function updateImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('template-image').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Function to download the edited template as an image
+        function downloadTemplate() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            const img = document.getElementById('template-image');
+            const logo = document.getElementById('logo');
+
+            canvas.width = img.width;
+            canvas.height = img.height + 150;  // Extra space for headline and footer
+
+            // Draw the background image
+            ctx.drawImage(img, 0, 0);
+
+            // Draw headline text
+            const headline = document.getElementById('headline-text').textContent;
+            ctx.font = '36px Varela Round';
+            ctx.fillStyle = '#ffffff';
+            ctx.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.6)';
+            ctx.fillText(headline, 20, img.height - 20);
+
+            // Draw date
+            const date = document.getElementById('date-text').textContent;
+            ctx.font = '18px Varela Round';
+            ctx.fillText(date, canvas.width - 300, 40);
+
+            // Save the canvas as a PNG image
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = dataURL;
+            link.download = 'custom_news_template.png';
+            link.click();
+        }
+    </script>
+
 </body>
+
 </html>
