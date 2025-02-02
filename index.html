@@ -3,30 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template Editor</title>
+    <title>News Template Editor</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Varela+Round&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Template Editor</h1>
-
         <div class="template">
-            <div class="image-container">
-                <img id="template-image" src="https://via.placeholder.com/400x200" alt="Template Image">
+            <!-- Header with Logo and Date -->
+            <div class="header">
+                <div class="logo">
+                    <img id="logo" src="https://via.placeholder.com/150" alt="Logo">
+                </div>
+                <div class="date" id="date-text">
+                    <!-- Date will be dynamically set -->
+                </div>
             </div>
-            <div class="text-container">
-                <h2 id="template-text">Your editable text goes here</h2>
+
+            <!-- Background Image with Headline -->
+            <div class="image-box">
+                <img id="template-image" src="https://via.placeholder.com/800x400" alt="Template Image">
+                <h2 id="headline-text">Main Headline Goes Here</h2>
             </div>
-        </div>
 
-        <div class="controls">
-            <label for="image-upload">Upload Image:</label>
-            <input type="file" id="image-upload" accept="image/*">
+            <!-- Text Color and Email Section -->
+            <div class="controls">
+                <label for="color-picker">Choose Text Color:</label>
+                <input type="color" id="color-picker" value="#333333">
 
-            <label for="text-input">Edit Text:</label>
-            <input type="text" id="text-input" placeholder="Enter new text">
+                <label for="text-input">Edit Headline Text (Bangla Supported):</label>
+                <input type="text" id="text-input" placeholder="Enter new headline text">
 
-            <button onclick="downloadTemplate()">Download Template</button>
+                <label for="email-input">Enter Email:</label>
+                <input type="email" id="email-input" placeholder="Enter your email">
+
+                <div class="advertisement-box">
+                    <p>Advertisement Section</p>
+                    <input type="text" id="ad-input" placeholder="Enter Advertisement Text">
+                </div>
+
+                <button onclick="downloadTemplate()">Download Template</button>
+            </div>
         </div>
     </div>
 
