@@ -1,280 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional News Template - Created by Kabya</title>
-
+    <title>News Template Editor</title>
     <style>
-        /* Global Styles */
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
         }
-
-        /* Container for layout centering */
         .container {
-            width: 90%;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
-
-        /* Header Styles */
-        header {
-            background-color: #222;
-            padding: 20px 0;
-            text-align: center;
+        .template {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-
-        .header-container {
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .logo img {
+        .header img {
             max-width: 100px;
+            max-height: 50px;
         }
-
         .date {
             font-size: 18px;
-            font-family: 'Varela Round', sans-serif;
-            color: #fff;
-        }
-
-        /* Main Section */
-        .main-container {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .image-box {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-bottom: 20px;
-        }
-
-        .image-box img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        #headline-text {
-            position: absolute;
-            bottom: 10px;
-            left: 20px;
-            font-size: 36px;
             font-weight: bold;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         }
-
-        /* Controls Section */
+        .news-image {
+            width: 100%;
+            height: 300px;
+            background-color: #ccc;
+            background-position: center;
+            background-size: cover;
+            margin-top: 20px;
+        }
+        .news-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+        .email {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .advertisement {
+            font-size: 14px;
+            margin-top: 30px;
+            color: #888;
+        }
         .controls {
             margin-top: 20px;
-            text-align: center;
         }
-
-        .controls input {
+        .controls input, .controls select, .controls button {
+            width: 100%;
             padding: 10px;
-            margin: 10px 0;
+            margin-bottom: 10px;
+            font-size: 16px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            font-size: 16px;
         }
-
-        .advertisement-box {
-            margin-top: 20px;
-            background-color: #f4f4f4;
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #333;
+        .controls button {
+            background-color: #4CAF50;
             color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
         }
-
-        button:hover {
-            background-color: #555;
+        .controls button:hover {
+            background-color: #45a049;
         }
-
-        /* Footer Styles */
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
             }
-
-            .main-container {
-                margin-top: 20px;
-            }
-
-            .controls {
-                width: 100%;
-            }
-
-            .image-box {
-                width: 90%;
-            }
-
-            #headline-text {
-                font-size: 24px;
+            .template {
+                height: auto;
             }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <input type="file" id="logo-upload" accept="image/*" onchange="updateLogo(event)">
-                <img id="logo" src="https://via.placeholder.com/150" alt="Logo">
-            </div>
-            <div class="date" id="date-text"></div>
+<div class="container">
+    <div class="template">
+        <div class="header">
+            <img id="channel-logo" src="https://via.placeholder.com/100x50" alt="Channel Logo">
+            <div class="date" id="date"></div>
         </div>
-    </header>
+        <div class="news-image" id="news-image"></div>
+        <div class="news-title" id="news-title">Sample News Title</div>
+        <div class="email" id="email">email@example.com</div>
+        <div class="advertisement">Your Advertisement Here</div>
+    </div>
 
-    <!-- Main Section -->
-    <main class="main-container">
-        <div class="image-box">
-            <input type="file" id="image-upload" accept="image/*" onchange="updateImage(event)">
-            <img id="template-image" src="https://via.placeholder.com/800x400" alt="Main Image">
-            <h2 id="headline-text">Main Headline Goes Here</h2>
-        </div>
+    <div class="controls">
+        <label for="logo">Channel Logo URL:</label>
+        <input type="url" id="logo" placeholder="Enter logo URL" onchange="updateLogo()">
+        
+        <label for="image">News Image URL:</label>
+        <input type="url" id="image" placeholder="Enter image URL" onchange="updateImage()">
+        
+        <label for="title">News Title:</label>
+        <input type="text" id="title" placeholder="Enter title" onchange="updateTitle()">
+        
+        <label for="title-color">News Title Color:</label>
+        <input type="color" id="title-color" value="#333333" onchange="updateTitleColor()">
+        
+        <label for="email">Reporter Email:</label>
+        <input type="email" id="email-input" placeholder="Enter email" onchange="updateEmail()">
+        
+        <label for="advertisement">Advertisement:</label>
+        <input type="text" id="advertisement" placeholder="Enter ad text" onchange="updateAdvertisement()">
+        
+        <button onclick="previewChanges()">Preview Changes</button>
+    </div>
+</div>
 
-        <!-- Editable Sections -->
-        <section class="controls">
-            <label for="color-picker">Choose Text Color:</label>
-            <input type="color" id="color-picker" value="#333333">
+<script>
+    // Automatically set today's date
+    document.getElementById("date").textContent = new Date().toLocaleDateString();
 
-            <label for="text-input">Edit Headline Text (Bangla Supported):</label>
-            <input type="text" id="text-input" placeholder="Enter new headline text">
+    // Update the channel logo
+    function updateLogo() {
+        const logoUrl = document.getElementById("logo").value;
+        document.getElementById("channel-logo").src = logoUrl;
+    }
 
-            <label for="email-input">Enter Email:</label>
-            <input type="email" id="email-input" placeholder="Enter your email">
+    // Update the news image
+    function updateImage() {
+        const imageUrl = document.getElementById("image").value;
+        document.getElementById("news-image").style.backgroundImage = `url(${imageUrl})`;
+    }
 
-            <div class="advertisement-box">
-                <p>Advertisement Section</p>
-                <input type="text" id="ad-input" placeholder="Enter Advertisement Text">
-            </div>
+    // Update the news title
+    function updateTitle() {
+        const title = document.getElementById("title").value;
+        document.getElementById("news-title").textContent = title;
+    }
 
-            <button onclick="downloadTemplate()">Download Template</button>
-        </section>
-    </main>
+    // Update the news title color
+    function updateTitleColor() {
+        const color = document.getElementById("title-color").value;
+        document.getElementById("news-title").style.color = color;
+    }
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>Created by Kabya &copy; 2025. All rights reserved.</p>
-        </div>
-    </footer>
+    // Update the email address
+    function updateEmail() {
+        const email = document.getElementById("email-input").value;
+        document.getElementById("email").textContent = email;
+    }
 
-    <script>
-        // Set the current date dynamically
-        const dateElement = document.getElementById('date-text');
-        const currentDate = new Date().toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-        dateElement.textContent = currentDate;
+    // Update the advertisement text
+    function updateAdvertisement() {
+        const adText = document.getElementById("advertisement").value;
+        document.querySelector(".advertisement").textContent = adText;
+    }
 
-        // Function to update headline text
-        document.getElementById('text-input').addEventListener('input', function (event) {
-            document.getElementById('headline-text').textContent = event.target.value;
-        });
-
-        // Function to update text color
-        document.getElementById('color-picker').addEventListener('input', function (event) {
-            document.getElementById('headline-text').style.color = event.target.value;
-        });
-
-        // Function to update logo image
-        function updateLogo(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('logo').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Function to update main image
-        function updateImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('template-image').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Function to download the edited template as an image
-        function downloadTemplate() {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            const img = document.getElementById('template-image');
-            const logo = document.getElementById('logo');
-
-            canvas.width = img.width;
-            canvas.height = img.height + 150;  // Extra space for headline and footer
-
-            // Draw the background image
-            ctx.drawImage(img, 0, 0);
-
-            // Draw headline text
-            const headline = document.getElementById('headline-text').textContent;
-            ctx.font = '36px Varela Round';
-            ctx.fillStyle = '#ffffff';
-            ctx.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.6)';
-            ctx.fillText(headline, 20, img.height - 20);
-
-            // Draw date
-            const date = document.getElementById('date-text').textContent;
-            ctx.font = '18px Varela Round';
-            ctx.fillText(date, canvas.width - 300, 40);
-
-            // Save the canvas as a PNG image
-            const dataURL = canvas.toDataURL('image/png');
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'custom_news_template.png';
-            link.click();
-        }
-    </script>
+    // Preview changes in the template
+    function previewChanges() {
+        updateLogo();
+        updateImage();
+        updateTitle();
+        updateTitleColor();
+        updateEmail();
+        updateAdvertisement();
+    }
+</script>
 
 </body>
-
 </html>
