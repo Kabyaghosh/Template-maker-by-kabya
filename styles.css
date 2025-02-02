@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #f4f4f9;
     display: flex;
     justify-content: center;
@@ -15,56 +15,79 @@ body {
 }
 
 .container {
-    text-align: center;
     width: 80%;
-    max-width: 800px;
-}
-
-h1 {
-    margin-bottom: 20px;
-    color: #333;
+    max-width: 1000px;
 }
 
 .template {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
 }
 
-.image-container {
+.logo img {
+    width: 150px;
+}
+
+.date {
+    font-size: 18px;
+    font-family: 'Varela Round', sans-serif;
+    color: #555;
+}
+
+.image-box {
+    position: relative;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 #template-image {
     width: 100%;
     height: auto;
-    border: 2px solid #ddd;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.text-container {
-    margin-top: 10px;
-}
-
-#template-text {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
+#headline-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 36px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    font-family: 'Varela Round', sans-serif;
+    margin: 0;
 }
 
 .controls {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .controls label {
     display: block;
     margin: 10px 0;
+    font-weight: bold;
 }
 
-.controls input[type="text"], .controls input[type="file"] {
-    width: 80%;
+.controls input[type="text"], .controls input[type="email"], .controls input[type="color"] {
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
+}
+
+.controls input[type="file"] {
+    margin-bottom: 20px;
 }
 
 .controls button {
@@ -78,4 +101,17 @@ h1 {
 
 .controls button:hover {
     background-color: #45a049;
+}
+
+.advertisement-box {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.advertisement-box p {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
