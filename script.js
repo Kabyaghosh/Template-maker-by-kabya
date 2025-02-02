@@ -18,8 +18,20 @@ document.getElementById('color-picker').addEventListener('input', function(event
     document.getElementById('headline-text').style.color = event.target.value;
 });
 
-// Update image when user uploads a new one
-document.getElementById('image-upload').addEventListener('change', function(event) {
+// Function to update the logo image
+function updateLogo(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('logo').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// Function to update the background image
+function updateImage(event) {
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
@@ -28,7 +40,7 @@ document.getElementById('image-upload').addEventListener('change', function(even
         };
         reader.readAsDataURL(file);
     }
-});
+}
 
 // Download the edited template as an image
 function downloadTemplate() {
