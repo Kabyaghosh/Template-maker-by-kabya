@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Template Editor</h1>
+
+        <div class="template">
+            <div class="image-container">
+                <img id="template-image" src="https://via.placeholder.com/400x200" alt="Template Image">
+            </div>
+            <div class="text-container">
+                <h2 id="template-text">Your editable text goes here</h2>
+            </div>
+        </div>
+
+        <div class="controls">
+            <label for="image-upload">Upload Image:</label>
+            <input type="file" id="image-upload" accept="image/*">
+
+            <label for="text-input">Edit Text:</label>
+            <input type="text" id="text-input" placeholder="Enter new text">
+
+            <button onclick="downloadTemplate()">Download Template</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
