@@ -3,216 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Poster Editor By KABYA</title>
+    <title>News Poster Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            text-align: center;
-            padding: 10px;
+            background: #f0f2f5;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
         .container {
             display: flex;
+            flex-direction: row;
             justify-content: center;
-            flex-wrap: wrap;
+            gap: 20px;
+            width: 90%;
+            max-width: 1100px;
         }
         .editor {
-            width: 100%;
-            max-width: 350px;
-            padding: 15px;
+            flex: 1;
             background: white;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            min-width: 300px;
+        }
+        .poster-preview {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .poster {
             width: 100%;
-            max-width: 400px;
-            background: white;
-            border: 5px solid red;
-            padding: 10px;
+            max-width: 450px;
+            border: 5px solid #ff3b30;
+            padding: 15px;
             text-align: center;
-            position: relative;
+            border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            background-image: url("BG.png"); /* Subtle Texture */
-            background-size: cover; /* or contain, depending on your need */
-            background-repeat: no-repeat;
-            background-position: center;
-            background-color: #EFCFA0;
+            background: white;
         }
         .top-section {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 5px 10px;
-            background: red;
+            background: #ff3b30;
             color: white;
-            font-size: 14px;
+            padding: 10px;
             font-weight: bold;
+            border-radius: 5px 5px 0 0;
         }
         .news-image {
             width: 100%;
             height: 250px;
             object-fit: cover;
             background: #ddd;
-        }
-        .bottom-section {
-            padding: 10px;
-        }
-        .news-title {
-            font-size: 18px;
-            font-weight: bold;
-            padding: 8px;
-            background: #ff5722;
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-            margin-bottom: 10px;
-        }
-        .email {
-            font-size: 14px;
-            font-weight: bold;
-            padding: 8px;
-            background-color: #474747;
-            
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-            margin-bottom: 6px;
-            
-            
-            
-            margin-bottom: 10px;
-        }
-        .sponsor {
-            background: red;
-            color: white;
-            padding: 8px;
-            font-size: 14px;
-            text-align: center;
             border-radius: 5px;
         }
-        input, textarea {
+        .news-title, .email, .sponsor {
+            padding: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .news-title {
+            background: #ff5722;
+            color: white;
+        }
+        .email {
+            background: #333;
+            color: white;
+        }
+        .sponsor {
+            background: #ff3b30;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        input, textarea, select, button {
             width: 100%;
-            padding: 8px;
-            margin-top: 5px;
+            padding: 10px;
+            margin-top: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
         button {
-            margin-top: 10px;
-            padding: 10px;
-            width: 100%;
-            font-size: 14px;
-            background: red;
+            background: #ff3b30;
             color: white;
-            border: none;
+            font-weight: bold;
             cursor: pointer;
+        }
+        .template-selector {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .template-option {
+            width: 80px;
+            height: 100px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            background: #ddd;
             border-radius: 5px;
         }
-        /* Responsive Styles */
-        @media (max-width: 500px) {
-            .poster {
-                max-width: 95%;
-            }
-            .editor {
-                max-width: 90%;
-            }
-            .top-section {
-                font-size: 12px;
-                padding: 5px;
-            }
-            .news-title {
-                font-size: 16px;
-            }
+        .template-option.selected {
+            border: 2px solid red;
+        }
+        .font-selector {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-
-    <h2>News Poster Editor By KABYA</h2>
-
+    <h2>News Poster Editor</h2>
     <div class="container">
         <div class="editor">
             <label>Upload News Image:</label>
-            <input type="file" id="mainImageUpload"><br><br>
+            <input type="file" id="mainImageUpload"><br>
+
+            <label>Choose Template:</label>
+            <div class="template-selector">
+                <div class="template-option selected" onclick="selectTemplate(1)"></div>
+                <div class="template-option" onclick="selectTemplate(2)"></div>
+                <div class="template-option" onclick="selectTemplate(3)"></div>
+            </div>
+
+            <label>Select Font:</label>
+            <select id="fontSelector" class="font-selector">
+                <option value="Arial">Arial</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Verdana">Verdana</option>
+            </select>
 
             <label>News Channel Name:</label>
-            <input type="text" id="channelNameInput" value="Channel Name"><br><br>
+            <input type="text" id="channelNameInput" value="Channel Name"><br>
 
             <label>Date:</label>
-            <input type="text" id="dateInput" value="Set Your date"><br><br>
+            <input type="text" id="dateInput" value="Set Your date"><br>
 
             <label>News Title:</label>
-            <textarea id="newsTitleInput" rows="2">Title goes here</textarea><br><br>
+            <textarea id="newsTitleInput" rows="2">Title goes here</textarea><br>
 
             <label>Email Address:</label>
-            <input type="text" id="emailInput" value="youremail@gmail.com"><br><br>
+            <input type="text" id="emailInput" value="youremail@gmail.com"><br>
 
-            <label>Sponsor Text:</label>
-            <input type="text" id="sponsorTextInput" value="Sponsor Section"><br><br>
+            <label>Sponsor:</label>
+            <input type="text" id="sponsorTextInput" value="Sponsor Section">
+            <input type="file" id="sponsorImageUpload"><br>
 
             <button onclick="downloadPoster()">Download Poster</button>
         </div>
 
-        <div class="poster" id="poster">
-            <div class="top-section">
-                <div id="channelName">channel name</div>
-                <div id="dateText">Date </div>
-            </div>
-            <img id="mainImage" class="news-image" src="" alt="News Image">
-            <div class="bottom-section">
-                <div class="news-title" id="newsTitle">
-                    Title Goes Here
+        <div class="poster-preview">
+            <div class="poster" id="poster">
+                <div class="top-section">
+                    <div id="channelName">Channel Name</div>
+                    <div id="dateText">Date</div>
                 </div>
+                <img id="mainImage" class="news-image" src="" alt="News Image">
+                <div class="news-title" id="newsTitle">Title Goes Here</div>
                 <div class="email" id="emailText">youremail@gmail.com</div>
+                <div class="sponsor" id="sponsorText"><span>Sponsor Section</span> <img id="sponsorImage" src="" style="height: 30px;"></div>
             </div>
-            <div class="sponsor" id="sponsorText">Sponsor Section</div>
         </div>
     </div>
 
     <script>
-        document.getElementById('mainImageUpload').addEventListener('change', function(event) {
+        function selectTemplate(template) {
+            document.querySelectorAll('.template-option').forEach(el => el.classList.remove('selected'));
+            document.querySelectorAll('.template-option')[template - 1].classList.add('selected');
+        }
+
+        document.getElementById('sponsorImageUpload').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById('mainImage').src = e.target.result;
+                    document.getElementById('sponsorImage').src = e.target.result;
                 }
                 reader.readAsDataURL(file);
             }
         });
-
-        document.getElementById('channelNameInput').addEventListener('input', function() {
-            document.getElementById('channelName').innerText = this.value;
-        });
-
-        document.getElementById('dateInput').addEventListener('input', function() {
-            document.getElementById('dateText').innerText = this.value;
-        });
-
-        document.getElementById('newsTitleInput').addEventListener('input', function() {
-            document.getElementById('newsTitle').innerText = this.value;
-        });
-
-        document.getElementById('emailInput').addEventListener('input', function() {
-            document.getElementById('emailText').innerText = this.value;
-        });
-
-        document.getElementById('sponsorTextInput').addEventListener('input', function() {
-            document.getElementById('sponsorText').innerText = this.value;
-        });
-
-        function downloadPoster() {
-            html2canvas(document.getElementById("poster")).then(canvas => {
-                const link = document.createElement("a");
-                link.href = canvas.toDataURL("image/png");
-                link.download = "news_poster.png";
-                link.click();
-            });
-        }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 </body>
 </html>
+
