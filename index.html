@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Poster Editor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,16 +47,18 @@
             text-align: center;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            background: white;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
         .top-section {
             display: flex;
             justify-content: space-between;
-            background: #ff3b30;
+            background: rgba(255, 59, 48, 0.8);
             color: white;
             padding: 10px;
             font-weight: bold;
             border-radius: 5px 5px 0 0;
+            backdrop-filter: blur(5px);
         }
         .news-image {
             width: 100%;
@@ -69,23 +72,21 @@
             margin-top: 10px;
             font-weight: bold;
             border-radius: 5px;
+            backdrop-filter: blur(8px);
         }
         .news-title {
-            background: #ff5722;
+            background: rgba(255, 87, 34, 0.8);
             color: white;
         }
         .email {
-            background: #333;
+            background: rgba(51, 51, 51, 0.8);
             color: white;
         }
         .sponsor {
-            background: #ff3b30;
+            background: rgba(255, 59, 48, 0.8);
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
-        input, textarea, select, button {
+        input, textarea, button {
             width: 100%;
             padding: 10px;
             margin-top: 10px;
@@ -98,25 +99,6 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .template-selector {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .template-option {
-            width: 80px;
-            height: 100px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            background: #ddd;
-            border-radius: 5px;
-        }
-        .template-option.selected {
-            border: 2px solid red;
-        }
-        .font-selector {
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -125,20 +107,6 @@
         <div class="editor">
             <label>Upload News Image:</label>
             <input type="file" id="mainImageUpload"><br>
-
-            <label>Choose Template:</label>
-            <div class="template-selector">
-                <div class="template-option selected" onclick="selectTemplate(1)"></div>
-                <div class="template-option" onclick="selectTemplate(2)"></div>
-                <div class="template-option" onclick="selectTemplate(3)"></div>
-            </div>
-
-            <label>Select Font:</label>
-            <select id="fontSelector" class="font-selector">
-                <option value="Arial">Arial</option>
-                <option value="Tahoma">Tahoma</option>
-                <option value="Verdana">Verdana</option>
-            </select>
 
             <label>News Channel Name:</label>
             <input type="text" id="channelNameInput" value="Channel Name"><br>
@@ -152,9 +120,8 @@
             <label>Email Address:</label>
             <input type="text" id="emailInput" value="youremail@gmail.com"><br>
 
-            <label>Sponsor:</label>
-            <input type="text" id="sponsorTextInput" value="Sponsor Section">
-            <input type="file" id="sponsorImageUpload"><br>
+            <label>Sponsor Text:</label>
+            <input type="text" id="sponsorTextInput" value="Sponsor Section"><br>
 
             <button onclick="downloadPoster()">Download Poster</button>
         </div>
@@ -168,28 +135,53 @@
                 <img id="mainImage" class="news-image" src="" alt="News Image">
                 <div class="news-title" id="newsTitle">Title Goes Here</div>
                 <div class="email" id="emailText">youremail@gmail.com</div>
-                <div class="sponsor" id="sponsorText"><span>Sponsor Section</span> <img id="sponsorImage" src="" style="height: 30px;"></div>
+                <div class="sponsor" id="sponsorText">Sponsor Section</div>
             </div>
         </div>
     </div>
 
     <script>
-        function selectTemplate(template) {
-            document.querySelectorAll('.template-option').forEach(el => el.classList.remove('selected'));
-            document.querySelectorAll('.template-option')[template - 1].classList.add('selected');
-        }
-
-        document.getElementById('sponsorImageUpload').addEventListener('change', function(event) {
+        document.getElementById('mainImageUpload').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById('sponsorImage').src = e.target.result;
+                    document.getElementById('mainImage').src = e.target.result;
                 }
                 reader.readAsDataURL(file);
             }
         });
+
+        document.getElementById('channelNameInput').addEventListener('input', function() {
+            document.getElementById('channelName').innerText = this.value;
+        });
+        
+        document.getElementById('dateInput').addEventListener('input', function() {
+            document.getElementById('dateText').innerText = this.value;
+        });
+
+        document.getElementById('newsTitleInput').addEventListener('input', function() {
+            document.getElementById('newsTitle').innerText = this.value;
+        });
+
+        document.getElementById('emailInput').addEventListener('input', function() {
+            document.getElementById('emailText').innerText = this.value;
+        });
+
+        document.getElementById('sponsorTextInput').addEventListener('input', function() {
+            document.getElementById('sponsorText').innerText = this.value;
+        });
+
+        function downloadPoster() {
+            html2canvas(document.getElementById('poster')).then(canvas => {
+                let link = document.createElement('a');
+                link.download = 'news_poster.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
     </script>
 </body>
 </html>
+
 
