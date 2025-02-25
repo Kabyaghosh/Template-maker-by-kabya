@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Poster Editor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,24 +46,31 @@
             text-align: center;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+            background: white;
+            position: relative;
         }
         .top-section {
             display: flex;
+            align-items: center;
             justify-content: space-between;
             background: rgba(255, 59, 48, 0.8);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 10px;
             font-weight: bold;
             border-radius: 5px 5px 0 0;
-            backdrop-filter: blur(5px);
+        }
+        .channel-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
         }
         .news-image {
             width: 100%;
             height: 250px;
             object-fit: cover;
-            background: #ddd;
             border-radius: 5px;
         }
         .news-title, .email, .sponsor {
@@ -72,19 +78,21 @@
             margin-top: 10px;
             font-weight: bold;
             border-radius: 5px;
-            backdrop-filter: blur(8px);
-        }
-        .news-title {
             background: rgba(255, 87, 34, 0.8);
-            color: white;
-        }
-        .email {
-            background: rgba(51, 51, 51, 0.8);
+            backdrop-filter: blur(10px);
             color: white;
         }
         .sponsor {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: rgba(255, 59, 48, 0.8);
-            color: white;
+        }
+        .sponsor-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-left: 10px;
         }
         input, textarea, button {
             width: 100%;
@@ -106,82 +114,93 @@
     <div class="container">
         <div class="editor">
             <label>Upload News Image:</label>
-            <input type="file" id="mainImageUpload"><br>
-
+            <input type="file" id="mainImageUpload" accept="image/*"><br>
+            
+            <label>Channel Logo:</label>
+            <input type="file" id="channelLogoUpload" accept="image/*"><br>
+            
             <label>News Channel Name:</label>
-            <input type="text" id="channelNameInput" value="Channel Name"><br>
-
+            <input type="text" id="channelNameInput"><br>
+            
             <label>Date:</label>
-            <input type="text" id="dateInput" value="Set Your date"><br>
-
+            <input type="text" id="dateInput"><br>
+            
             <label>News Title:</label>
-            <textarea id="newsTitleInput" rows="2">Title goes here</textarea><br>
-
+            <textarea id="newsTitleInput" rows="2"></textarea><br>
+            
             <label>Email Address:</label>
-            <input type="text" id="emailInput" value="youremail@gmail.com"><br>
-
+            <input type="text" id="emailInput"><br>
+            
             <label>Sponsor Text:</label>
-            <input type="text" id="sponsorTextInput" value="Sponsor Section"><br>
-
+            <input type="text" id="sponsorTextInput"><br>
+            
+            <label>Upload Sponsor Logo:</label>
+            <input type="file" id="sponsorLogoUpload" accept="image/*"><br>
+            
             <button onclick="downloadPoster()">Download Poster</button>
         </div>
 
         <div class="poster-preview">
             <div class="poster" id="poster">
                 <div class="top-section">
-                    <div id="channelName">Channel Name</div>
+                    <div class="channel-container">
+                        <img id="channelLogo" class="channel-logo" src="" alt="Channel Logo">
+                        <div id="channelName">Channel Name</div>
+                    </div>
                     <div id="dateText">Date</div>
                 </div>
                 <img id="mainImage" class="news-image" src="" alt="News Image">
                 <div class="news-title" id="newsTitle">Title Goes Here</div>
                 <div class="email" id="emailText">youremail@gmail.com</div>
-                <div class="sponsor" id="sponsorText">Sponsor Section</div>
+                <div class="sponsor" id="sponsorText">Sponsor Section <img id="sponsorLogo" class="sponsor-logo" src="" alt="Sponsor Logo"></div>
             </div>
         </div>
     </div>
-
+    
     <script>
         document.getElementById('mainImageUpload').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('mainImage').src = e.target.result;
-                }
-                reader.readAsDataURL(file);
+                document.getElementById('mainImage').src = URL.createObjectURL(file);
             }
         });
-
+        
+        document.getElementById('channelLogoUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('channelLogo').src = URL.createObjectURL(file);
+            }
+        });
+        
+        document.getElementById('sponsorLogoUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('sponsorLogo').src = URL.createObjectURL(file);
+            }
+        });
+        
         document.getElementById('channelNameInput').addEventListener('input', function() {
-            document.getElementById('channelName').innerText = this.value;
+            document.getElementById('channelName').textContent = this.value;
         });
         
         document.getElementById('dateInput').addEventListener('input', function() {
-            document.getElementById('dateText').innerText = this.value;
+            document.getElementById('dateText').textContent = this.value;
         });
-
+        
         document.getElementById('newsTitleInput').addEventListener('input', function() {
-            document.getElementById('newsTitle').innerText = this.value;
+            document.getElementById('newsTitle').textContent = this.value;
         });
-
+        
         document.getElementById('emailInput').addEventListener('input', function() {
-            document.getElementById('emailText').innerText = this.value;
+            document.getElementById('emailText').textContent = this.value;
         });
-
+        
         document.getElementById('sponsorTextInput').addEventListener('input', function() {
-            document.getElementById('sponsorText').innerText = this.value;
+            document.getElementById('sponsorText').textContent = this.value;
         });
-
-        function downloadPoster() {
-            html2canvas(document.getElementById('poster')).then(canvas => {
-                let link = document.createElement('a');
-                link.download = 'news_poster.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-        }
     </script>
 </body>
 </html>
+
 
 
